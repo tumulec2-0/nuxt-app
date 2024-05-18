@@ -11,7 +11,7 @@
                         alt="Logo" />
                     <span
                         class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-                        SaveEnergy
+                        ECOntrol 🤙
                     </span>
                 </NuxtLink>
                 <div class="flex items-center lg:order-2">

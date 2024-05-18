@@ -3,5 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss'
-]
+  ],
+  plugins: [
+    { src: '~/plugins/apexcharts.js', mode: 'client' }
+  ]
 })

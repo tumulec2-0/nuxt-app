@@ -4,7 +4,7 @@
             <NuxtLink
                 to="#"
                 class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
-                SaveEnergy
+                ECOntrol 🤙
             </NuxtLink>
             <p class="my-6 text-gray-500 dark:text-gray-400">
                 Open-source library of over 400+ web components and interactive
@@ -51,7 +51,7 @@
             <span
                 class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                 © 2024
-                <a href="#" class="hover:underline">SaveEnergy.</a>
+                <a href="#" class="hover:underline">ECOntrol 🤙.</a>
                 All Rights Reserved.
             </span>
         </div>

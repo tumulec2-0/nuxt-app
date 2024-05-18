@@ -26,6 +26,7 @@
                                 type="email"
                                 name="email"
                                 id="email"
+                                v-model="login"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com"
                                 required="" />
@@ -41,6 +42,7 @@
                                 name="password"
                                 id="password"
                                 placeholder="••••••••"
+                                v-model="password"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required="" />
                         </div>
@@ -51,6 +53,7 @@
                                         id="remember"
                                         aria-describedby="remember"
                                         type="checkbox"
+                                        v-model="rememberPassword"
                                         class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                                         required="" />
                                 </div>
@@ -91,9 +94,34 @@
 
 <script>
 export default {
+    data() {
+        return {
+            login: '',
+            password: '',
+        };
+    },
     methods: {
-        signIn() {
-            this.$router.push('/dashboard');
+        async signIn() {
+            await $fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                body: JSON.stringify({
+                    login: this.login,
+                    password: this.password,
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Invalid credentials');
+                })
+                .then((data) => {
+                    localStorage.setItem('token', data.token);
+                    this.$router.push('/dashboard');
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         },
     },
 };

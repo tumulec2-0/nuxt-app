@@ -97,7 +97,7 @@
                         alt="Helene Avatar" />
                     <h3
                         class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <NuxtLink to="#">Helene Engels</NuxtLink>
+                        <NuxtLink to="#">Jakub</NuxtLink>
                     </h3>
                     <p>CTO/Co-founder</p>
                     <ul class="flex justify-center mt-4 space-x-4">
@@ -172,7 +172,7 @@
                         alt="Jese Avatar" />
                     <h3
                         class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <NuxtLink to="#">Jese Leos</NuxtLink>
+                        <NuxtLink to="#">Jakub</NuxtLink>
                     </h3>
                     <p>SEO & Marketing</p>
                     <ul class="flex justify-center mt-4 space-x-4">
@@ -247,7 +247,7 @@
                         alt="Joseph Avatar" />
                     <h3
                         class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <NuxtLink to="#">Joseph Mcfall</NuxtLink>
+                        <NuxtLink to="#">Michał</NuxtLink>
                     </h3>
                     <p>Sales</p>
                     <ul class="flex justify-center mt-4 space-x-4">
@@ -322,7 +322,7 @@
                         alt="Sofia Avatar" />
                     <h3
                         class="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        <NuxtLink to="#">Lana Byrd</NuxtLink>
+                        <NuxtLink to="#">Bartek</NuxtLink>
                     </h3>
                     <p>Web Designer</p>
                     <ul class="flex justify-center mt-4 space-x-4">

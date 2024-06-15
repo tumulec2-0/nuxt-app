@@ -18,7 +18,7 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Create and account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <form @submit.prevent="register" class="space-y-4 md:space-y-6" action="#">
                         <div>
                             <label
                                 for="email"
@@ -29,6 +29,7 @@
                                 type="email"
                                 name="email"
                                 id="email"
+                                v-model="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="name@company.com"
                                 required="" />
@@ -43,6 +44,7 @@
                                 type="password"
                                 name="password"
                                 id="password"
+                                v-model="password"
                                 placeholder="••••••••"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 required="" />
@@ -54,7 +56,7 @@
                                 Confirm password
                             </label>
                             <input
-                                type="confirm-password"
+                                type="password"
                                 name="confirm-password"
                                 id="confirm-password"
                                 placeholder="••••••••"
@@ -66,6 +68,7 @@
                                 <input
                                     id="terms"
                                     aria-describedby="terms"
+                                    v-model="terms"
                                     type="checkbox"
                                     class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                                     required="" />
@@ -103,3 +106,34 @@
         </div>
     </section>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
+            isCompany: true,
+            terms: false,
+        };
+    },
+    methods: {
+        async register() {
+            await $fetch('http://127.0.0.1:3001/api/users/register', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: this.email,
+                    password: this.password,
+                    isCompany: this.isCompany,
+                }),
+            })
+                .then((response) => {
+                    navigateTo('/login');
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+    },
+};
+</script>

@@ -30,7 +30,7 @@
                 </svg>
             </div>
         </div>
-        <div id="area-chart"></div>
+        <div :id="id" class="h-96"></div>
         <div
             class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
             <div class="flex justify-between items-center pt-5">
@@ -127,11 +127,29 @@
 import ApexCharts from 'apexcharts'
 
 export default {
+    props: {
+        id: {
+            type: String,
+            default: Math.random().toString(36).substring(7),
+        },
+        name: {
+            type: String,
+            default: 'Day of the week',
+        },
+        data: {
+            type: Array,
+            default: [1, 2, 3, 4, 5, 6, 7],
+        },
+        categories: {
+            type: Array,
+            default: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        },
+    },
     data() {
         return {
             options: {
                 chart: {
-                    height: '100%',
+                    height: '384px',
                     maxWidth: '100%',
                     type: 'area',
                     dropShadow: {
@@ -173,21 +191,13 @@ export default {
                 },
                 series: [
                     {
-                        name: 'New users',
-                        data: [6500, 6418, 6456, 6526, 6356, 6456],
+                        name: this.name,
+                        data: this.data,
                         color: '#22c55e',
                     },
                 ],
                 xaxis: {
-                    categories: [
-                        '01 February',
-                        '02 February',
-                        '03 February',
-                        '04 February',
-                        '05 February',
-                        '06 February',
-                        '07 February',
-                    ],
+                    categories: this.categories,
                     labels: {
                         show: false,
                     },
@@ -206,11 +216,11 @@ export default {
     },
     mounted() {
         if (
-            document.getElementById('area-chart') &&
+            document.getElementById(this.id) &&
             typeof ApexCharts !== 'undefined'
         ) {
             const chart = new ApexCharts(
-                document.getElementById('area-chart'),
+                document.getElementById(this.id),
                 this.options
             );
             chart.render();

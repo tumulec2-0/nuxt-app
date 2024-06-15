@@ -15,7 +15,10 @@
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
-                    <form @submit.prevent="signIn" class="space-y-4 md:space-y-6" action="#">
+                    <form
+                        @submit.prevent="signIn"
+                        class="space-y-4 md:space-y-6"
+                        action="#">
                         <div>
                             <label
                                 for="email"
@@ -53,9 +56,7 @@
                                         id="remember"
                                         aria-describedby="remember"
                                         type="checkbox"
-                                        v-model="rememberPassword"
-                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                        required="" />
+                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" />
                                 </div>
                                 <div class="ml-3 text-sm">
                                     <label
@@ -92,37 +93,26 @@
     </section>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            login: '',
-            password: '',
-        };
-    },
-    methods: {
-        async signIn() {
-            await $fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    login: this.login,
-                    password: this.password,
-                }),
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Invalid credentials');
-                })
-                .then((data) => {
-                    localStorage.setItem('token', data.token);
-                    this.$router.push('/dashboard');
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-    },
+<script setup>
+import { ref } from 'vue';
+
+const login = ref('');
+const password = ref('');
+
+const signIn = async () => {
+    try {
+        const response = await $fetch('http://127.0.0.1:3001/api/users/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: login.value,
+                password: password.value,
+            }),
+        });
+        navigateTo('/dashboard');
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user-email', response.user.email);
+    } catch (error) {
+        console.error(error);
+    }
 };
 </script>

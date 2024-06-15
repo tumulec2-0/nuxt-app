@@ -12,6 +12,7 @@
   "dependencies": {
     "apexcharts": "^3.48.0",
     "flowbite": "^2.3.0",
+    "flowbite-datepicker": "^1.2.6",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
